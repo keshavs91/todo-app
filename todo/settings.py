@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-nr7jz=a(qv)im+aht76#v3*0syxb!_v&&1t&)i8q!@#*jx&_yo
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['16.171.107.168']
+ALLOWED_HOSTS = ['3.109.47.28']
 
 
 # Application definition
@@ -100,8 +100,8 @@ DATABASES = {
         'NAME': 'mydb',
         'USER': 'myuser',
         'PASSWORD': 'password',
-        'HOST': 'localhost',
-        'PORT': '',
+        'HOST': 'django-todo-database.cdn0bjz2nzsv.ap-south-1.rds.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
