@@ -29,7 +29,7 @@ def get_task(request: RESTRequest, id: str) -> RESTResponse:
 
 
 @api_view(["PUT"])
-@permission_classes([permissions.AllowAny])
+@permission_classes([permissions.IsAuthenticated])
 def create_task(request: RESTRequest) -> RESTResponse:
     print("creating task")
     data = request.data
@@ -41,7 +41,7 @@ def create_task(request: RESTRequest) -> RESTResponse:
 
 
 @api_view(["DELETE"])
-@permission_classes([permissions.AllowAny])
+@permission_classes([permissions.IsAuthenticated])
 def delete_task(request: RESTRequest) -> RESTResponse:
     data = request.data
     id = data.get("id")
