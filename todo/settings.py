@@ -13,6 +13,10 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 from datetime import timedelta
 import boto3
+import os
+
+from dotenv import load_dotenv
+load_dotenv(".env")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,13 +26,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-nr7jz=a(qv)im+aht76#v3*0syxb!_v&&1t&)i8q!@#*jx&_yo'
+SECRET_KEY = os.getenv("DJANGO_SECURITY_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = ['3.109.47.28', '127.0.0.1']
-DB = boto3.resource("dynamodb")
+DB = boto3.resource(
+    service_name="dynamodb",
+    aws_access_key_id=os.getenv("AWS_ACCESS_KEY"),
+    aws_secret_access_key=os.getenv("AWS_ACCESS_SECRET"),
+    region_name=os.getenv("AWS_REGION"),
+)
 # table = DB.create_table(
 #     TableName="todo_tasks",
 #     KeySchema=[
@@ -137,11 +146,11 @@ WSGI_APPLICATION = 'todo.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'mydb',
-        'USER': 'myuser',
-        'PASSWORD': 'password',
-        'HOST': 'django-todo-database.cdn0bjz2nzsv.ap-south-1.rds.amazonaws.com',
-        'PORT': '5432',
+        'NAME': os.getenv("POSTGRE_DATABASE"),
+        'USER': os.getenv("POSTGRE_USER"),
+        'PASSWORD': os.getenv("POSTGRE_PASSWORD"),
+        'HOST': os.getenv("POSTGRE_HOST"),
+        'PORT': os.getenv("POSTGRE_PORT"),
     }
 }
 

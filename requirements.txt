@@ -4,3 +4,5 @@ requests
 psycopg2
 psycopg2-binary
 djangorestframework-simplejwt
+boto3
+python-dotenv
